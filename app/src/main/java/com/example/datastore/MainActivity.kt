@@ -46,17 +46,4 @@ class MainActivity : AppCompatActivity() {
         Log.e("Data_Store", "Proto " + showCompleted)
 
     }
-
-    object UserPreferencesSerializer : Serializer<UserPreferences> {
-        override val defaultValue: UserPreferences = UserPreferences.getDefaultInstance()
-        override fun readFrom(input: InputStream): UserPreferences {
-            try {
-                return UserPreferences.parseFrom(input)
-            } catch (exception: InvalidProtocolBufferException) {
-                throw CorruptionException("Cannot read proto.", exception)
-            }
-        }
-
-        override fun writeTo(t: UserPreferences, output: OutputStream) = t.writeTo(output)
-    }
 }
